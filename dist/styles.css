@@ -176,4 +176,17 @@ p,li,h1,h2,h3{text-wrap:pretty}.heading h2,.hero h1,.intro,.dialog-info h2{text-
 /* Map */
 .map-frame{background:#f0f4f9;border-radius:var(--r-lg);overflow:hidden;aspect-ratio:1328/580}.map-frame picture,.map-frame img{display:block;width:100%;height:100%}
 .map-links{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;margin-top:1.25rem;font-size:.8125rem;color:var(--muted);padding-inline:.5rem}.map-links div{display:flex;gap:1.75rem;flex-wrap:wrap}
-@media(max-width:768px){.map-frame{aspect-ratio:810/507}.desc-switch{top:.5rem;right:.5rem}.map-frame{border-radius:1.75rem}}
+@media(max-width:768px){.map-frame{aspect-ratio:740/502}.desc-switch{top:.5rem;right:.5rem}.map-frame{border-radius:1.75rem}}
+
+h2 span{display:block}
+/* Two logo cards side by side. */
+.logo-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto}
+.logo-item:first-child{grid-row:auto}
+.logo-stage,.logo-item:first-child .logo-stage{min-height:26rem}
+.logo-item:first-child .logo-art img{max-height:none}
+.logo-art-alternative{width:70%}
+/* Both control pills share one height, one top edge and one inset. */
+.card-tone-switch,.desc-switch{top:.75rem;height:2.5rem;padding-block:0;align-items:center}
+.card-tone-switch{left:.75rem;padding-inline:.35rem;gap:0}
+.desc-switch{right:.75rem;padding-inline:.9rem .4rem}
+@media(max-width:768px){.logo-grid{grid-template-columns:1fr}.logo-stage,.logo-item:first-child .logo-stage{min-height:15rem}.desc-switch{top:.75rem;right:.75rem}}
