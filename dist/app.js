@@ -6,7 +6,14 @@ nav.addEventListener('click',e=>{if(e.target.closest('a')){nav.classList.remove(
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){nav.classList.remove('open');menu.setAttribute('aria-expanded','false');menu.textContent='Меню'}});
 let toastTimer;
 function notify(message){clearTimeout(toastTimer);$('#toast').textContent=message;$('#toast').hidden=false;toastTimer=setTimeout(()=>{$('#toast').hidden=true},3000)}
-document.querySelectorAll('[data-copy]').forEach(button=>button.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(button.dataset.copy);notify('Скопировано: '+button.dataset.copy)}catch{notify('Код цвета: '+button.dataset.copy+', выделите и скопируйте вручную')}}));
+document.querySelectorAll('[data-copy]').forEach(button=>button.addEventListener('click',async()=>{
+  try{
+    await navigator.clipboard.writeText(button.dataset.copy);notify('Скопировано: '+button.dataset.copy);
+    // The arrow turns into a check for a moment: feedback on the control itself, not only a toast.
+    const use=button.querySelector('use');
+    if(use){use.setAttribute('href','#i-check');clearTimeout(button._copyTimer);button._copyTimer=setTimeout(()=>use.setAttribute('href','#i-up-right'),1400)}
+  }catch{notify('Не удалось скопировать: '+button.dataset.copy+'. Выделите и скопируйте вручную')}
+}));
 // Each card owns its color, surface, and current download independently.
 const logoAssets={
   full:{color:'rsk-logo.svg',white:'rsk-logo-white.svg',black:'rsk-logo-black.svg'},
@@ -42,22 +49,31 @@ document.querySelectorAll('[data-logo-key]').forEach(card=>{
     stage.classList.toggle('desc-on',descriptor);update();
   });
 });
-const samples=document.querySelectorAll('.spec-sample');
-samples.forEach(sample=>sample.addEventListener('paste',e=>{e.preventDefault();document.execCommand('insertText',false,e.clipboardData.getData('text/plain'))}));
+// Specimens are editable plain text. Where plaintext-only is unsupported, fall back to true and strip pasted markup.
+document.querySelectorAll('.spec-sample').forEach(sample=>{
+  sample.contentEditable='plaintext-only';
+  if(sample.contentEditable!=='plaintext-only'){
+    sample.contentEditable='true';
+    sample.addEventListener('paste',e=>{
+      e.preventDefault();const selection=getSelection();if(!selection.rangeCount)return;
+      selection.deleteFromDocument();selection.getRangeAt(0).insertNode(document.createTextNode(e.clipboardData.getData('text/plain')));selection.collapseToEnd();
+    });
+  }
+});
 const projects=[
-{name:'Центральный квартал',city:'Луганск',image:'assets/central.webp',slug:'zhk-tsentralnyy-kvartal',folder:'Центральный квартал'},
-{name:'Кленовая аллея',city:'Мариуполь',image:'assets/klen.webp',slug:'zhk-klenovaya-alleya',folder:'Кленовая Аллея'},
-{name:'Морская аллея',city:'Геническ',image:'assets/sea.webp',slug:'zhk-morskaya-alleya',folder:'Морская аллея'},
-{name:'Садовый квартал',city:'Макеевка',image:'assets/garden.webp',slug:'zhk-sadovyy-kvartal',folder:'Макеевка Садовый квартал'},
-{name:'Черешневый сад',city:'Мелитополь',image:'assets/cherry.webp',slug:'zhk-chereshnevyy-sad',folder:'Черешневый сад'},
-{name:'Лазурный берег',city:'Геническ',image:'assets/azure.webp',slug:'zhk-lazurnyy-bereg',folder:'Лазурный Берег'}];
+{name:'Центральный квартал',city:'Луганск',image:'assets/central.webp',small:'assets/central-600.webp',w:1200,slug:'zhk-tsentralnyy-kvartal',folder:'Центральный квартал'},
+{name:'Кленовая аллея',city:'Мариуполь',image:'assets/klen.webp',small:'assets/klen-600.webp',w:1200,slug:'zhk-klenovaya-alleya',folder:'Кленовая Аллея'},
+{name:'Морская аллея',city:'Геническ',image:'assets/sea.webp',small:'assets/sea-600.webp',w:1000,slug:'zhk-morskaya-alleya',folder:'Морская аллея'},
+{name:'Садовый квартал',city:'Макеевка',image:'assets/garden.webp',small:'assets/garden-600.webp',w:1200,slug:'zhk-sadovyy-kvartal',folder:'Макеевка Садовый квартал'},
+{name:'Черешневый сад',city:'Мелитополь',image:'assets/cherry.webp',small:'assets/cherry-600.webp',w:1200,slug:'zhk-chereshnevyy-sad',folder:'Черешневый сад'},
+{name:'Лазурный берег',city:'Геническ',image:'assets/azure.webp',small:'assets/azure-600.webp',w:1200,slug:'zhk-lazurnyy-bereg',folder:'Лазурный Берег'}];
 const diskUrl=p=>'https://disk.yandex.ru/d/Vznzzq6ocT7DKA/'+encodeURIComponent(p.folder);
 let city='Все';
 function icon(name){const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('class','ic');svg.setAttribute('aria-hidden','true');const use=document.createElementNS('http://www.w3.org/2000/svg','use');use.setAttribute('href','#i-'+name);svg.append(use);return svg}
 function element(tag,className,text){const el=document.createElement(tag);if(className)el.className=className;if(text!==undefined)el.textContent=text;return el}
-function renderProjects(){const query=$('#project-search').value.trim().toLocaleLowerCase('ru');const visible=projects.filter(p=>(city==='Все'||p.city===city)&&(`${p.name} ${p.city}`).toLocaleLowerCase('ru').includes(query));const grid=$('#project-grid');grid.replaceChildren();$('#project-empty').hidden=visible.length>0;visible.forEach((p,i)=>{const card=element('article','project-card');card.style.setProperty('--i',i);const button=element('button','project-image');button.setAttribute('aria-label','Посмотреть рендер: '+p.name);const img=element('img');img.src=p.image;img.alt='Рендер ЖК '+p.name;img.loading='lazy';img.width=800;img.height=600;button.append(img);button.addEventListener('click',()=>openProject(p,button));const info=element('div','project-info');info.append(element('p','',p.city),element('h3','',p.name));const links=element('div','project-links');const disk=element('a','','Все ракурсы ');disk.append(icon('up-right'));disk.href=diskUrl(p);disk.target='_blank';disk.rel='noopener';const download=element('a','','Скачать превью ');download.append(icon('down'));download.href=p.image;download.download=p.name;links.append(disk,download);info.append(links);card.append(button,info);grid.append(card)})}
-document.querySelectorAll('[data-city]').forEach(b=>b.addEventListener('click',()=>{city=b.dataset.city;document.querySelectorAll('[data-city]').forEach(button=>button.setAttribute('aria-pressed',String(b===button)));renderProjects()}));
-$('#project-search').addEventListener('input',renderProjects);
+function renderProjects(animate=false){const query=$('#project-search').value.trim().toLocaleLowerCase('ru');const visible=projects.filter(p=>(city==='Все'||p.city===city)&&(`${p.name} ${p.city}`).toLocaleLowerCase('ru').includes(query));const grid=$('#project-grid');grid.replaceChildren();$('#project-empty').hidden=visible.length>0;visible.forEach((p,i)=>{const card=element('article',animate?'project-card enter':'project-card');card.style.setProperty('--i',i);const button=element('button','project-image');button.setAttribute('aria-label','Посмотреть рендер: '+p.name);const img=element('img');img.src=p.image;img.srcset=`${p.small} 600w, ${p.image} ${p.w}w`;img.sizes='(max-width:768px) 100vw, (max-width:1150px) 50vw, 60vw';img.alt='Рендер ЖК '+p.name;img.loading='lazy';img.width=800;img.height=600;button.append(img);button.addEventListener('click',()=>openProject(p,button));const info=element('div','project-info');info.append(element('p','',p.city),element('h3','',p.name));const links=element('div','project-links');const disk=element('a','','Все ракурсы ');disk.append(icon('up-right'));disk.href=diskUrl(p);disk.target='_blank';disk.rel='noopener';const download=element('a','','Скачать превью ');download.append(icon('down'));download.href=p.image;download.download=p.name;links.append(disk,download);info.append(links);card.append(button,info);grid.append(card)})}
+document.querySelectorAll('[data-city]').forEach(b=>b.addEventListener('click',()=>{city=b.dataset.city;document.querySelectorAll('[data-city]').forEach(button=>button.setAttribute('aria-pressed',String(b===button)));renderProjects(true)}));
+$('#project-search').addEventListener('input',()=>renderProjects());
 // A critically damped spring keeps presentation and velocity when redirected.
 const dialog=$('#project-dialog');
 const reduceMotion=matchMedia('(prefers-reduced-motion: reduce)');
@@ -151,7 +167,7 @@ if('IntersectionObserver' in window){
   },{rootMargin:'-15% 0px -55% 0px',threshold:0});
   document.querySelectorAll('main .section').forEach(section=>sectionObserver.observe(section));
 }
-renderProjects();
+renderProjects(true);
 // One entrance system: blocks rise once when they first enter the viewport.
 (()=>{
   const targets=document.querySelectorAll('.heading,.logo-toolbar,.logo-item,.guidance,.swatch,.note,.type-workspace,.alphabet,.project-toolbar,.download-list>a,.map-frame,.map-links,.footer-main');
