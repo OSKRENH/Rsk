@@ -1,0 +1,61 @@
+{
+  "retrieved": "2026-10-10",
+  "site": "https://rsk-development.ru",
+  "renders": "https://disk.yandex.ru/d/Vznzzq6ocT7DKA",
+  "fonts": "Golos Text",
+  "colors": {
+    "logo": "#69CAFF",
+    "interface": "#00A7FF",
+    "background": "#F6F6F6"
+  },
+  "projects": [
+    {
+      "name": "Центральный квартал",
+      "city": "Луганск",
+      "image": "assets/central.jpg",
+      "url": "https://rsk-development.ru/projects/zhk-tsentralnyy-kvartal",
+      "source": "https://rsk-development.ru/upload/iblock/4c2/z61t02jflvr45hbiowkq9rm02bk1zru6.jpg",
+      "disk": "https://disk.yandex.ru/d/Vznzzq6ocT7DKA/%D0%A6%D0%B5%D0%BD%D1%82%D1%80%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9%20%D0%BA%D0%B2%D0%B0%D1%80%D1%82%D0%B0%D0%BB"
+    },
+    {
+      "name": "Кленовая аллея",
+      "city": "Мариуполь",
+      "image": "assets/klen.jpg",
+      "url": "https://rsk-development.ru/projects/zhk-klenovaya-alleya",
+      "source": "https://rsk-development.ru/upload/iblock/f59/ex6t0411pworpt5lha2cmsmq0n1pfctx.jpg",
+      "disk": "https://disk.yandex.ru/d/Vznzzq6ocT7DKA/%D0%9A%D0%BB%D0%B5%D0%BD%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%90%D0%BB%D0%BB%D0%B5%D1%8F"
+    },
+    {
+      "name": "Морская аллея",
+      "city": "Геническ",
+      "image": "assets/sea.jpg",
+      "url": "https://rsk-development.ru/projects/zhk-morskaya-alleya",
+      "source": "https://rsk-development.ru/upload/iblock/455/gv0ikzo7jlff0p6r52g7t7ijsz3q9vor.jpg",
+      "disk": "https://disk.yandex.ru/d/Vznzzq6ocT7DKA/%D0%9C%D0%BE%D1%80%D1%81%D0%BA%D0%B0%D1%8F%20%D0%B0%D0%BB%D0%BB%D0%B5%D1%8F"
+    },
+    {
+      "name": "Садовый квартал",
+      "city": "Макеевка",
+      "image": "assets/garden.png",
+      "url": "https://rsk-development.ru/projects/zhk-sadovyy-kvartal",
+      "source": "https://rsk-development.ru/upload/iblock/154/9uh0sn4rordgxassx5b2vy05l2srg708.png",
+      "disk": "https://disk.yandex.ru/d/Vznzzq6ocT7DKA/%D0%9C%D0%B0%D0%BA%D0%B5%D0%B5%D0%B2%D0%BA%D0%B0%20%D0%A1%D0%B0%D0%B4%D0%BE%D0%B2%D1%8B%D0%B9%20%D0%BA%D0%B2%D0%B0%D1%80%D1%82%D0%B0%D0%BB"
+    },
+    {
+      "name": "Черешневый сад",
+      "city": "Мелитополь",
+      "image": "assets/cherry.jpg",
+      "url": "https://rsk-development.ru/projects/zhk-chereshnevyy-sad",
+      "source": "https://rsk-development.ru/upload/iblock/ad7/0v3fn9r4rume4ecz3la4bn0muot21lhn.jpg",
+      "disk": "https://disk.yandex.ru/d/Vznzzq6ocT7DKA/%D0%A7%D0%B5%D1%80%D0%B5%D1%88%D0%BD%D0%B5%D0%B2%D1%8B%D0%B9%20%D1%81%D0%B0%D0%B4"
+    },
+    {
+      "name": "Лазурный берег",
+      "city": "Геническ",
+      "image": "assets/azure.png",
+      "url": "https://rsk-development.ru/projects/zhk-lazurnyy-bereg",
+      "source": "https://rsk-development.ru/upload/iblock/b73/9hp5xrqs8w9ndvwliwus23sxeuo2kao5.png",
+      "disk": "https://disk.yandex.ru/d/Vznzzq6ocT7DKA/%D0%9B%D0%B0%D0%B7%D1%83%D1%80%D0%BD%D1%8B%D0%B9%20%D0%91%D0%B5%D1%80%D0%B5%D0%B3"
+    }
+  ]
+}

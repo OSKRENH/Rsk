@@ -1,0 +1,11 @@
+{
+  "name": "rsk-brand-center",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/validate.mjs",
+    "check": "node --check dist/app.js && node scripts/validate.mjs",
+    "deploy": "npx wrangler@4 deploy"
+  }
+}
