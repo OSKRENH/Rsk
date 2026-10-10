@@ -13,7 +13,7 @@ const logoAssets={
   symbol:{color:'rsk-symbol.svg',white:'rsk-symbol-white.svg',black:'rsk-symbol-black.svg'},
   alternative:{color:'rsk-logo-alternative.svg',white:'rsk-logo-alternative-white.svg',black:'rsk-logo-alternative-black.svg'}
 };
-const toneLabels={color:'цветной',white:'белый',black:'чёрный'};
+const toneLabels={color:'цветной',white:'белый',black:'черный'};
 document.querySelectorAll('[data-logo-key]').forEach(card=>{
   const key=card.dataset.logoKey,stage=card.querySelector('.logo-stage'),image=card.querySelector('.logo-art img'),inline=card.querySelector('.logo-svg'),download=card.querySelector('[data-logo-download]');
   const title=card.querySelector('h3').textContent,note=card.querySelector('.asset-caption p'),toggle=card.querySelector('.desc-switch');
@@ -42,10 +42,10 @@ document.querySelectorAll('[data-logo-key]').forEach(card=>{
     stage.classList.toggle('desc-on',descriptor);update();
   });
 });
-const preview=$('#font-preview');if(matchMedia('(max-width:768px)').matches){$('#font-size').value='36';$('#font-size-output').value='36 px'}
-preview.style.fontSize=$('#font-size').value+'px';preview.style.fontWeight=$('#font-weight').value;
-$('#font-weight').addEventListener('change',e=>preview.style.fontWeight=e.target.value);
-$('#font-size').addEventListener('input',e=>{preview.style.fontSize=e.target.value+'px';$('#font-size-output').value=e.target.value+' px'});
+// Weight selector overrides the role weights of all three specimens; "По стилю" restores them.
+const samples=document.querySelectorAll('.spec-sample');
+$('#font-weight').addEventListener('change',e=>samples.forEach(sample=>{sample.style.fontWeight=e.target.value}));
+samples.forEach(sample=>sample.addEventListener('paste',e=>{e.preventDefault();document.execCommand('insertText',false,e.clipboardData.getData('text/plain'))}));
 const projects=[
 {name:'Центральный квартал',city:'Луганск',image:'assets/central.webp',slug:'zhk-tsentralnyy-kvartal',folder:'Центральный квартал'},
 {name:'Кленовая аллея',city:'Мариуполь',image:'assets/klen.webp',slug:'zhk-klenovaya-alleya',folder:'Кленовая Аллея'},
