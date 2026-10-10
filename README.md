@@ -12,7 +12,7 @@
 
 - `npm run check`: проверка JavaScript, файлов и ссылок внутри страницы.
 - Каталог публикации: `dist`. Сборка без зависимостей.
-- Cloudflare Workers: `npm run deploy` после подключения аккаунта. Конфигурация `wrangler.jsonc`, имя Worker `rsk-brand`.
+- Cloudflare Workers: `npm run deploy` после подключения аккаунта. Конфигурация `wrangler.jsonc`, имя Worker `rsk`.
 - Cloudflare Workers Builds: подключите `OSKRENH/Rsk`, ветка `main`, build command `npm run build`, deploy command `npx wrangler@4 deploy`. Корень проекта `/`.
 - Cloudflare Pages: build command `npm run build`, output directory `dist`.
 
