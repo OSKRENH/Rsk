@@ -27,7 +27,7 @@ document.querySelectorAll('[data-logo-key]').forEach(card=>{
     card.querySelectorAll('[data-logo-tone]').forEach(other=>other.setAttribute('aria-pressed',String(other===button)));
   }));
 });
-const preview=$('#font-preview');if(matchMedia('(max-width:768px)').matches){$('#font-size').value='40';$('#font-size-output').value='40 px'}preview.value=preview.value.replace('\\n','\n');
+const preview=$('#font-preview');if(matchMedia('(max-width:768px)').matches){$('#font-size').value='36';$('#font-size-output').value='36 px'}preview.value=preview.value.replace('\\n','\n');
 preview.style.fontSize=$('#font-size').value+'px';preview.style.fontWeight=$('#font-weight').value;
 $('#font-weight').addEventListener('change',e=>preview.style.fontWeight=e.target.value);
 $('#font-size').addEventListener('input',e=>{preview.style.fontSize=e.target.value+'px';$('#font-size-output').value=e.target.value+' px'});
@@ -124,7 +124,6 @@ function releaseDrag(vy){
     const dt=first?(last.t-first.t)/1000:0,vy=dt>0?(last.y-first.y)/dt:0;releaseDrag(vy)};
   zone.addEventListener('pointerup',end);zone.addEventListener('pointercancel',end);
 })();
-document.querySelector('.hero-photo').addEventListener('click',e=>openProject(projects[0],e.currentTarget));
 dialog.addEventListener('cancel',e=>{e.preventDefault();moveDialog(0)});
 dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)moveDialog(0)}});
 reduceMotion.addEventListener('change',()=>{if(frame){cancelAnimationFrame(frame);settleDialog()}});
