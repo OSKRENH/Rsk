@@ -165,8 +165,3 @@ renderProjects();
     el.classList.add('reveal');seen.observe(el);
   });
 })();
-// The cities sit in the right part of the map; on narrow screens start the pan there.
-(()=>{const scroller=$('.map-scroll'),map=scroller.querySelector('img');
-  const pan=()=>{scroller.scrollLeft=(scroller.scrollWidth-scroller.clientWidth)*.8};
-  if(map.complete)pan();else map.addEventListener('load',pan,{once:true});
-})();

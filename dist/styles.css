@@ -174,8 +174,6 @@ p,li,h1,h2,h3{text-wrap:pretty}.heading h2,.hero h1,.intro,.dialog-info h2{text-
 .desc-switch[aria-checked=true] i{background:var(--ink)}.desc-switch[aria-checked=true] i::after{transform:translateX(.85rem)}
 
 /* Map */
-.map-frame{background:#f0f4f9;border-radius:var(--r-lg);overflow:hidden}
-.map-scroll{overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:thin}
-.map-scroll img{width:100%;height:auto;min-width:46rem}
+.map-frame{background:#f0f4f9;border-radius:var(--r-lg);overflow:hidden;aspect-ratio:1328/580}.map-frame picture,.map-frame img{display:block;width:100%;height:100%}
 .map-links{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;margin-top:1.25rem;font-size:.8125rem;color:var(--muted);padding-inline:.5rem}.map-links div{display:flex;gap:1.75rem;flex-wrap:wrap}
-@media(max-width:768px){.map-scroll img{min-width:60rem}.desc-switch{top:.5rem;right:.5rem}.map-frame{border-radius:1.75rem}}
+@media(max-width:768px){.map-frame{aspect-ratio:810/507}.desc-switch{top:.5rem;right:.5rem}.map-frame{border-radius:1.75rem}}
