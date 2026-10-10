@@ -7,6 +7,26 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'){nav.classList.remov
 let toastTimer;
 function notify(message){clearTimeout(toastTimer);$('#toast').textContent=message;$('#toast').hidden=false;toastTimer=setTimeout(()=>{$('#toast').hidden=true},3000)}
 document.querySelectorAll('[data-copy]').forEach(button=>button.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(button.dataset.copy);notify('Скопировано: '+button.dataset.copy)}catch{notify('Код цвета: '+button.dataset.copy+' · выделите и скопируйте вручную')}}));
+// Each card owns its color, surface, and current download independently.
+const logoAssets={
+  full:{color:'rsk-logo.svg',white:'rsk-logo-white.svg',black:'rsk-logo-black.svg'},
+  symbol:{color:'rsk-symbol.svg',white:'rsk-symbol-white.svg',black:'rsk-symbol-black.svg'},
+  alternative:{color:'rsk-logo-alternative.svg',white:'rsk-logo-alternative-white.svg',black:'rsk-logo-alternative-black.svg'}
+};
+const toneLabels={color:'цветной',white:'белый',black:'чёрный'};
+document.querySelectorAll('[data-logo-key]').forEach(card=>{
+  const stage=card.querySelector('.logo-stage'),image=card.querySelector('.logo-art img'),download=card.querySelector('[data-logo-download]');
+  const title=card.querySelector('h3').textContent;
+  // Preload all three so a rapid change has immediate visual feedback.
+  Object.values(logoAssets[card.dataset.logoKey]).forEach(file=>{const preload=new Image();preload.src='assets/'+file});
+  card.querySelectorAll('[data-logo-tone]').forEach(button=>button.addEventListener('click',()=>{
+    const tone=button.dataset.logoTone,file='assets/'+logoAssets[card.dataset.logoKey][tone];
+    card.dataset.currentTone=tone;image.src=file;image.alt=title+' РСК — '+toneLabels[tone];
+    stage.classList.remove('tone-color','tone-white','tone-black');stage.classList.add('tone-'+tone);
+    download.href=file;download.setAttribute('aria-label','Скачать: '+title.toLowerCase()+', '+toneLabels[tone]);
+    card.querySelectorAll('[data-logo-tone]').forEach(other=>other.setAttribute('aria-pressed',String(other===button)));
+  }));
+});
 const preview=$('#font-preview');if(matchMedia('(max-width:768px)').matches){$('#font-size').value='40';$('#font-size-output').value='40 px'}preview.value=preview.value.replace('\\n','\n');
 preview.style.fontSize=$('#font-size').value+'px';preview.style.fontWeight=$('#font-weight').value;
 $('#font-weight').addEventListener('change',e=>preview.style.fontWeight=e.target.value);

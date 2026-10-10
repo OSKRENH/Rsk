@@ -63,7 +63,12 @@
     "source": "Рабочие_файлы_РСК.ai",
     "variant": "Крупный горизонтальный логотип с трёхстрочным дескриптором",
     "export": "Original vector paths from PDF-compatible Illustrator file; white duplicates omitted to preserve transparent lettering",
-    "color": "#72C6EF"
+    "color": "#72C6EF",
+    "compactVariants": [
+      "rsk-symbol.svg",
+      "rsk-symbol-white.svg",
+      "rsk-symbol-black.svg"
+    ]
   },
   "alternativeLogo": {
     "file": "https://www.figma.com/design/gL1rquJd4wM6VvhV7U0pAO/",
