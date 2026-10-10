@@ -199,3 +199,16 @@ h2 span{display:block}
 .spec-h2{font-size:clamp(1.5rem,2.6vw,2rem);line-height:1.25;letter-spacing:-.025em;font-weight:500}
 .spec-body{font-size:1.125rem;line-height:1.6;font-weight:400;max-width:58ch;color:rgb(255 255 255 / .86)}
 @media(max-width:768px){.specimen{grid-template-columns:1fr;gap:1rem;padding-block:1.75rem}.spec-h1{font-size:clamp(2.25rem,11.5vw,3rem)}.spec-h2{font-size:1.5rem}.spec-body{font-size:1rem}.spec-size{display:none}}
+
+/* Typography section sits on the light page, like the rest of the content sections. */
+#type{background:none;color:var(--ink);border-radius:0;width:auto;max-width:1440px;margin:0 auto;padding:8rem 3.5rem 0}
+#type .heading p{color:var(--muted)}#type ::selection{background:var(--blue)}#type :focus-visible{outline-color:var(--ink)}
+.type-workspace{border-top-color:var(--line)}
+.type-meta span:first-child{color:var(--ink)}.type-meta span:last-child,.type-controls label{color:var(--muted)}
+select{background:#fff;border-color:var(--line);color:var(--ink)}
+.specimens,.specimen{border-color:var(--line)}
+.spec-label h3{color:var(--ink)}.spec-label p{color:var(--muted)}
+.spec-body{color:var(--ink)}.spec-sample:focus-visible{outline-color:var(--ink)}
+.alphabet{color:var(--muted)}#type .text-link{color:var(--ink)}
+@media(max-width:1150px){#type{padding-inline:2rem}}
+@media(max-width:768px){#type{width:auto;margin:0 auto;padding:5rem 1.25rem 0;border-radius:0}}
