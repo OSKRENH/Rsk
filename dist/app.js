@@ -7,7 +7,6 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'){nav.classList.remov
 let toastTimer;
 function notify(message){clearTimeout(toastTimer);$('#toast').textContent=message;$('#toast').hidden=false;toastTimer=setTimeout(()=>{$('#toast').hidden=true},3000)}
 document.querySelectorAll('[data-copy]').forEach(button=>button.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(button.dataset.copy);notify('Скопировано: '+button.dataset.copy)}catch{notify('Код цвета: '+button.dataset.copy+' · выделите и скопируйте вручную')}}));
-document.querySelectorAll('[data-logo-theme]').forEach(button=>button.addEventListener('click',()=>{const white=button.dataset.logoTheme==='white';document.querySelectorAll('[data-logo-theme]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));$('#full-logo-stage').classList.toggle('blue',white);$('#full-logo').src=white?'assets/rsk-logo-white.svg':'assets/rsk-logo.svg';$('#logo-download').href=$('#full-logo').src}));
 const preview=$('#font-preview');if(matchMedia('(max-width:768px)').matches){$('#font-size').value='40';$('#font-size-output').value='40 px'}preview.value=preview.value.replace('\\n','\n');
 preview.style.fontSize=$('#font-size').value+'px';preview.style.fontWeight=$('#font-weight').value;
 $('#font-weight').addEventListener('change',e=>preview.style.fontWeight=e.target.value);
