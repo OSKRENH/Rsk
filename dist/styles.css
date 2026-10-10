@@ -311,3 +311,7 @@ select{background:#fff;border-color:var(--line);color:var(--ink)}
 .card-tone-switch button{width:30px;min-width:30px;height:44px}
 
 .alphabet p{text-wrap:balance}
+
+/* Header bar: half of the former pill radius (pill = half the bar height: 34px desktop, 30px mobile). */
+.topbar{border-radius:17px}
+@media(max-width:768px){.topbar{border-radius:15px}.topbar nav{border-radius:15px}}
