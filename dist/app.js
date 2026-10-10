@@ -49,10 +49,12 @@ $('#project-search').addEventListener('input',renderProjects);
 const dialog=$('#project-dialog');
 const reduceMotion=matchMedia('(prefers-reduced-motion: reduce)');
 let progress=0,velocity=0,target=0,frame=0,lastTime=0,sourceButton=null;
+let dragY=0,dragV=0,dragTarget=0,dragFrame=0,dragLast=0;
 function presentDialog(){
-  dialog.style.opacity=String(Math.max(0,Math.min(1,progress)));
-  dialog.style.transform=reduceMotion.matches?'none':`scale(${.94+.06*progress})`;
-  dialog.style.setProperty('--scrim',String(.5*Math.max(0,Math.min(1,progress))));
+  const open=Math.max(0,Math.min(1,progress)),span=dialog.offsetHeight||600,away=Math.max(0,Math.min(1,dragY/span));
+  dialog.style.opacity=String(open*(1-.4*away));
+  dialog.style.transform=`translateY(${dragY}px) `+(reduceMotion.matches?'none':`scale(${.94+.06*progress})`);
+  dialog.style.setProperty('--scrim',String(.5*open*(1-away)));
 }
 function settleDialog(){
   progress=target;velocity=0;frame=0;presentDialog();
@@ -75,7 +77,7 @@ function moveDialog(next){
   if(!frame){lastTime=performance.now();frame=requestAnimationFrame(springStep)}
 }
 function openProject(p,button){
-  sourceButton=button;
+  sourceButton=button;cancelAnimationFrame(dragFrame);dragFrame=0;dragY=0;dragV=0;
   $('#dialog-title').textContent=p.name;$('#dialog-city').textContent=p.city;
   $('#dialog-image').src=p.image;$('#dialog-image').alt='Рендер ЖК '+p.name;
   $('#dialog-download').href=p.image;$('#dialog-download').download=p.name;
@@ -87,6 +89,42 @@ function openProject(p,button){
   moveDialog(1);
 }
 $('#dialog-close').addEventListener('click',()=>moveDialog(0));
+// Sheet drag: 1:1 tracking with rubber-banded upward pull; release velocity is projected
+// (Apple's exponential deceleration) to choose dismiss vs return, then handed to a critically damped spring.
+const project=(v,rate=.998)=>v/1000*rate/(1-rate);
+const rubberband=(over,dim,k=.55)=>over*dim*k/(dim+k*Math.abs(over));
+function springDrag(now){
+  const dt=Math.min((now-dragLast)/1000,.064);dragLast=now;
+  const omega=20,displacement=dragY-dragTarget,coefficient=dragV+omega*displacement,decay=Math.exp(-omega*dt);
+  dragY=dragTarget+(displacement+coefficient*dt)*decay;dragV=(dragV-omega*coefficient*dt)*decay;
+  presentDialog();
+  if(Math.abs(dragY-dragTarget)<.5&&Math.abs(dragV)<5){
+    dragFrame=0;dragY=dragTarget;
+    if(dragTarget>0){dragY=0;dragV=0;progress=0;velocity=0;target=0;presentDialog();dialog.close();sourceButton?.focus({preventScroll:true})}
+    else presentDialog();
+  }else dragFrame=requestAnimationFrame(springDrag);
+}
+function releaseDrag(vy){
+  const span=dialog.offsetHeight,close=dragY+project(vy)>span*.3;
+  dragTarget=close?span+40:0;
+  if(reduceMotion.matches){dragV=0;dragY=dragTarget;if(close){dragY=0;progress=0;target=0;presentDialog();dialog.close();sourceButton?.focus({preventScroll:true})}else presentDialog();return}
+  dragV=vy;dragLast=performance.now();dragFrame=requestAnimationFrame(springDrag);
+}
+(()=>{
+  const zone=dialog.querySelector('img');let id=null,startY=0,samples=[];
+  zone.addEventListener('pointerdown',e=>{if(e.button>0)return;cancelAnimationFrame(dragFrame);dragFrame=0;id=e.pointerId;zone.setPointerCapture(id);
+    // Grab from the live on-screen offset so an interrupted release never jumps.
+    startY=e.clientY-dragY;samples=[{t:e.timeStamp,y:dragY}]});
+  zone.addEventListener('pointermove',e=>{if(e.pointerId!==id)return;
+    const raw=e.clientY-startY;dragY=raw<0?-rubberband(-raw,dialog.offsetHeight):raw;
+    samples.push({t:e.timeStamp,y:dragY});if(samples.length>6)samples.shift();presentDialog()});
+  const end=e=>{if(e.pointerId!==id)return;id=null;
+    const last=samples[samples.length-1],first=samples.find(s=>e.timeStamp-s.t<=100);
+    // Only motion in the last 100ms counts; holding still before release means zero velocity.
+    const dt=first?(last.t-first.t)/1000:0,vy=dt>0?(last.y-first.y)/dt:0;releaseDrag(vy)};
+  zone.addEventListener('pointerup',end);zone.addEventListener('pointercancel',end);
+})();
+document.querySelector('.hero-photo').addEventListener('click',e=>openProject(projects[0],e.currentTarget));
 dialog.addEventListener('cancel',e=>{e.preventDefault();moveDialog(0)});
 dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)moveDialog(0)}});
 reduceMotion.addEventListener('change',()=>{if(frame){cancelAnimationFrame(frame);settleDialog()}});
