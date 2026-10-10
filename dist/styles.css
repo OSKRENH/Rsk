@@ -287,3 +287,18 @@ select{background:#fff;border-color:var(--line);color:var(--ink)}
   .main-color .color-caption button[data-copy^="#"]{font-size:clamp(2.25rem,12vw,3rem)}
   .swatch:not(.main-color) .color-caption button[data-copy^="#"]{font-size:1.125rem}
 }
+
+/* ---- Palette v3: each color card holds its own hex and grouped values; all cards share one height. ---- */
+.palette-values{display:none}
+.palette{grid-template-columns:1.6fr 1fr 1fr;grid-template-rows:auto;gap:1.25rem;align-items:stretch}
+.swatch,.swatch.main-color{display:flex;flex-direction:column;justify-content:space-between;align-items:stretch;gap:2rem;min-height:21rem;padding:1.75rem;grid-row:auto;grid-column:auto}
+.swatch-values{display:flex;flex-direction:column}
+.swatch .value-line{display:block;width:100%;min-height:2.125rem;padding:.25rem 0;background:none;font-size:.9375rem;font-weight:400;line-height:1.35;color:var(--ink);text-align:left}
+.swatch.main-color .value-line{color:#fff}
+@media(hover:hover) and (pointer:fine){.swatch .value-line:hover{opacity:.6}}
+@media(max-width:768px){
+  .palette{grid-template-columns:1fr 1fr;gap:.75rem}
+  .swatch.main-color{grid-column:1/-1;min-height:17rem;padding:1.25rem}
+  .swatch{min-height:15rem;padding:1.1rem;gap:1.25rem}
+  .swatch .value-line{font-size:.875rem;min-height:2.125rem}
+}
