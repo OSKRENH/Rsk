@@ -212,3 +212,5 @@ select{background:#fff;border-color:var(--line);color:var(--ink)}
 .alphabet{color:var(--muted)}#type .text-link{color:var(--ink)}
 @media(max-width:1150px){#type{padding-inline:2rem}}
 @media(max-width:768px){#type{width:auto;margin:0 auto;padding:5rem 1.25rem 0;border-radius:0}}
+
+.color-caption p+p{margin-top:.15rem}

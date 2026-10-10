@@ -42,9 +42,7 @@ document.querySelectorAll('[data-logo-key]').forEach(card=>{
     stage.classList.toggle('desc-on',descriptor);update();
   });
 });
-// Weight selector overrides the role weights of all three specimens; "По стилю" restores them.
 const samples=document.querySelectorAll('.spec-sample');
-$('#font-weight').addEventListener('change',e=>samples.forEach(sample=>{sample.style.fontWeight=e.target.value}));
 samples.forEach(sample=>sample.addEventListener('paste',e=>{e.preventDefault();document.execCommand('insertText',false,e.clipboardData.getData('text/plain'))}));
 const projects=[
 {name:'Центральный квартал',city:'Луганск',image:'assets/central.webp',slug:'zhk-tsentralnyy-kvartal',folder:'Центральный квартал'},
