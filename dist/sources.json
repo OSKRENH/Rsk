@@ -83,5 +83,11 @@
       "height": 145
     },
     "color": "#69CAFF"
+  },
+  "map": {
+    "file": "assets/rsk-map.svg",
+    "png": "assets/rsk-map.png",
+    "source": "https://rsk-development.ru/assets/images/icons/custom-map-modern.svg",
+    "section": "География проектов на главной странице"
   }
 }

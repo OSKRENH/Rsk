@@ -157,3 +157,25 @@ dialog>img{touch-action:none;cursor:grab;-webkit-user-drag:none;user-select:none
 .dialog-grab{position:absolute;top:.6rem;left:50%;width:2.5rem;height:.3rem;margin-left:-1.25rem;border-radius:99px;background:rgb(255 255 255 / .9);z-index:1;pointer-events:none}
 
 p,li,h1,h2,h3{text-wrap:pretty}.heading h2,.hero h1,.intro,.dialog-info h2{text-wrap:balance}
+
+/* Full logo: block and descriptor are separate groups. The descriptor slides out of the block's right edge
+   (clipped to it) while the whole mark shifts left; hidden, it slides back left and the block settles at the center.
+   Units are SVG user units, so the motion scales with the logo. */
+.logo-svg{display:block;width:100%;height:auto;max-height:16rem;overflow:hidden}
+.logo-item:first-child .logo-art img{max-height:none}
+.lg-move,.lg-desc{transition:transform .9s var(--ease)}
+.lg-block path{fill:var(--lb,#72c6ef);transition:fill .45s var(--ease)}.lg-desc path{fill:var(--ld,#000);transition:fill .45s var(--ease)}
+.tone-color{--lb:#72c6ef;--ld:#000}.tone-white{--lb:#fff;--ld:#fff}.tone-black{--lb:#000;--ld:#000}
+.logo-stage:not(.desc-on) .lg-move{transform:translateX(155.94px)}.logo-stage:not(.desc-on) .lg-desc{transform:translateX(-320px)}
+.desc-switch{position:absolute;top:.75rem;right:.75rem;z-index:1;display:flex;align-items:center;gap:.6rem;padding:.35rem .4rem .35rem .85rem;border-radius:99px;background:rgb(255 255 255 / .85);font-size:.8125rem;font-weight:500;color:var(--ink);transition:transform .3s var(--ease)}
+.desc-switch:active{transform:scale(.96);transition-duration:.08s}
+.desc-switch i{position:relative;width:2.25rem;height:1.4rem;border-radius:99px;background:#c6d1d8;transition:background .3s var(--ease)}
+.desc-switch i::after{content:'';position:absolute;top:.15rem;left:.15rem;width:1.1rem;height:1.1rem;border-radius:50%;background:#fff;transition:transform .45s var(--ease)}
+.desc-switch[aria-checked=true] i{background:var(--ink)}.desc-switch[aria-checked=true] i::after{transform:translateX(.85rem)}
+
+/* Map */
+.map-frame{background:#f0f4f9;border-radius:var(--r-lg);overflow:hidden}
+.map-scroll{overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:thin}
+.map-scroll img{width:100%;height:auto;min-width:46rem}
+.map-links{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;margin-top:1.25rem;font-size:.8125rem;color:var(--muted);padding-inline:.5rem}.map-links div{display:flex;gap:1.75rem;flex-wrap:wrap}
+@media(max-width:768px){.map-scroll img{min-width:60rem}.desc-switch{top:.5rem;right:.5rem}.map-frame{border-radius:1.75rem}}

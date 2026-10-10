@@ -15,17 +15,32 @@ const logoAssets={
 };
 const toneLabels={color:'цветной',white:'белый',black:'чёрный'};
 document.querySelectorAll('[data-logo-key]').forEach(card=>{
-  const stage=card.querySelector('.logo-stage'),image=card.querySelector('.logo-art img'),download=card.querySelector('[data-logo-download]');
-  const title=card.querySelector('h3').textContent;
+  const key=card.dataset.logoKey,stage=card.querySelector('.logo-stage'),image=card.querySelector('.logo-art img'),inline=card.querySelector('.logo-svg'),download=card.querySelector('[data-logo-download]');
+  const title=card.querySelector('h3').textContent,note=card.querySelector('.asset-caption p'),toggle=card.querySelector('.desc-switch');
+  let tone='color',descriptor=true;
   // Preload all three so a rapid change has immediate visual feedback.
-  Object.values(logoAssets[card.dataset.logoKey]).forEach(file=>{const preload=new Image();preload.src='assets/'+file});
-  card.querySelectorAll('[data-logo-tone]').forEach(button=>button.addEventListener('click',()=>{
-    const tone=button.dataset.logoTone,file='assets/'+logoAssets[card.dataset.logoKey][tone];
-    card.dataset.currentTone=tone;image.src=file;image.alt=title+' РСК, '+toneLabels[tone];
+  Object.values(logoAssets[key]).forEach(file=>{const preload=new Image();preload.src='assets/'+file});
+  if(toggle)Object.values(logoAssets.symbol).forEach(file=>{const preload=new Image();preload.src='assets/'+file});
+  if(toggle)stage.classList.add('desc-on');
+  function update(){
+    // Without the descriptor the download is the compact mark in the same color.
+    const file='assets/'+logoAssets[toggle&&!descriptor?'symbol':key][tone];
+    const label=(toggle&&!descriptor?'Знак без дескриптора':title)+' РСК, '+toneLabels[tone];
+    card.dataset.currentTone=tone;
+    if(image){image.src=file;image.alt=label}
+    if(inline)inline.setAttribute('aria-label',label);
     stage.classList.remove('tone-color','tone-white','tone-black');stage.classList.add('tone-'+tone);
-    download.href=file;download.setAttribute('aria-label','Скачать: '+title.toLowerCase()+', '+toneLabels[tone]);
+    download.href=file;download.setAttribute('aria-label','Скачать: '+(toggle&&!descriptor?'знак без дескриптора':title.toLowerCase())+', '+toneLabels[tone]);
+    if(toggle&&note)note.textContent=descriptor?'С названием компании':'Только знак';
+  }
+  card.querySelectorAll('[data-logo-tone]').forEach(button=>button.addEventListener('click',()=>{
+    tone=button.dataset.logoTone;update();
     card.querySelectorAll('[data-logo-tone]').forEach(other=>other.setAttribute('aria-pressed',String(other===button)));
   }));
+  if(toggle)toggle.addEventListener('click',()=>{
+    descriptor=!descriptor;toggle.setAttribute('aria-checked',String(descriptor));
+    stage.classList.toggle('desc-on',descriptor);update();
+  });
 });
 const preview=$('#font-preview');if(matchMedia('(max-width:768px)').matches){$('#font-size').value='36';$('#font-size-output').value='36 px'}
 preview.style.fontSize=$('#font-size').value+'px';preview.style.fontWeight=$('#font-weight').value;
@@ -141,7 +156,7 @@ if('IntersectionObserver' in window){
 renderProjects();
 // One entrance system: blocks rise once when they first enter the viewport.
 (()=>{
-  const targets=document.querySelectorAll('.heading,.logo-toolbar,.logo-item,.guidance,.swatch,.note,.type-workspace,.alphabet,.project-toolbar,.download-list>a,.footer-main');
+  const targets=document.querySelectorAll('.heading,.logo-toolbar,.logo-item,.guidance,.swatch,.note,.type-workspace,.alphabet,.project-toolbar,.download-list>a,.map-frame,.map-links,.footer-main');
   if(!('IntersectionObserver' in window)||reduceMotion.matches){return}
   const seen=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('in');seen.unobserve(entry.target)}}),{rootMargin:'0px 0px -8% 0px',threshold:.08});
   targets.forEach(el=>{
@@ -149,4 +164,9 @@ renderProjects();
     el.style.setProperty('--i',Math.max(0,siblings.indexOf(el)));
     el.classList.add('reveal');seen.observe(el);
   });
+})();
+// The cities sit in the right part of the map; on narrow screens start the pan there.
+(()=>{const scroller=$('.map-scroll'),map=scroller.querySelector('img');
+  const pan=()=>{scroller.scrollLeft=(scroller.scrollWidth-scroller.clientWidth)*.8};
+  if(map.complete)pan();else map.addEventListener('load',pan,{once:true});
 })();
