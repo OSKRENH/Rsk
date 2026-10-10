@@ -64,5 +64,19 @@
     "variant": "Крупный горизонтальный логотип с трёхстрочным дескриптором",
     "export": "Original vector paths from PDF-compatible Illustrator file; white duplicates omitted to preserve transparent lettering",
     "color": "#72C6EF"
+  },
+  "alternativeLogo": {
+    "file": "https://www.figma.com/design/gL1rquJd4wM6VvhV7U0pAO/",
+    "nodes": {
+      "color": "25:586",
+      "white": "29:736",
+      "black": "29:747"
+    },
+    "export": "Original unmodified SVG exports from Figma",
+    "dimensions": {
+      "width": 526,
+      "height": 145
+    },
+    "color": "#69CAFF"
   }
 }
