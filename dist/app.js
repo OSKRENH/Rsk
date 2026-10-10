@@ -6,7 +6,7 @@ nav.addEventListener('click',e=>{if(e.target.closest('a')){nav.classList.remove(
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){nav.classList.remove('open');menu.setAttribute('aria-expanded','false');menu.textContent='Меню'}});
 let toastTimer;
 function notify(message){clearTimeout(toastTimer);$('#toast').textContent=message;$('#toast').hidden=false;toastTimer=setTimeout(()=>{$('#toast').hidden=true},3000)}
-document.querySelectorAll('[data-copy]').forEach(button=>button.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(button.dataset.copy);notify('Скопировано: '+button.dataset.copy)}catch{notify('Код цвета: '+button.dataset.copy+' · выделите и скопируйте вручную')}}));
+document.querySelectorAll('[data-copy]').forEach(button=>button.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(button.dataset.copy);notify('Скопировано: '+button.dataset.copy)}catch{notify('Код цвета: '+button.dataset.copy+', выделите и скопируйте вручную')}}));
 // Each card owns its color, surface, and current download independently.
 const logoAssets={
   full:{color:'rsk-logo.svg',white:'rsk-logo-white.svg',black:'rsk-logo-black.svg'},
@@ -21,7 +21,7 @@ document.querySelectorAll('[data-logo-key]').forEach(card=>{
   Object.values(logoAssets[card.dataset.logoKey]).forEach(file=>{const preload=new Image();preload.src='assets/'+file});
   card.querySelectorAll('[data-logo-tone]').forEach(button=>button.addEventListener('click',()=>{
     const tone=button.dataset.logoTone,file='assets/'+logoAssets[card.dataset.logoKey][tone];
-    card.dataset.currentTone=tone;image.src=file;image.alt=title+' РСК — '+toneLabels[tone];
+    card.dataset.currentTone=tone;image.src=file;image.alt=title+' РСК, '+toneLabels[tone];
     stage.classList.remove('tone-color','tone-white','tone-black');stage.classList.add('tone-'+tone);
     download.href=file;download.setAttribute('aria-label','Скачать: '+title.toLowerCase()+', '+toneLabels[tone]);
     card.querySelectorAll('[data-logo-tone]').forEach(other=>other.setAttribute('aria-pressed',String(other===button)));
@@ -40,8 +40,9 @@ const projects=[
 {name:'Лазурный берег',city:'Геническ',image:'assets/azure.webp',slug:'zhk-lazurnyy-bereg',folder:'Лазурный Берег'}];
 const diskUrl=p=>'https://disk.yandex.ru/d/Vznzzq6ocT7DKA/'+encodeURIComponent(p.folder);
 let city='Все';
+function icon(name){const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('class','ic');svg.setAttribute('aria-hidden','true');const use=document.createElementNS('http://www.w3.org/2000/svg','use');use.setAttribute('href','#i-'+name);svg.append(use);return svg}
 function element(tag,className,text){const el=document.createElement(tag);if(className)el.className=className;if(text!==undefined)el.textContent=text;return el}
-function renderProjects(){const query=$('#project-search').value.trim().toLocaleLowerCase('ru');const visible=projects.filter(p=>(city==='Все'||p.city===city)&&(`${p.name} ${p.city}`).toLocaleLowerCase('ru').includes(query));const grid=$('#project-grid');grid.replaceChildren();$('#project-empty').hidden=visible.length>0;visible.forEach(p=>{const card=element('article','project-card');const button=element('button','project-image');button.setAttribute('aria-label','Посмотреть рендер: '+p.name);const img=element('img');img.src=p.image;img.alt='Рендер ЖК '+p.name;img.loading='lazy';img.width=800;img.height=600;button.append(img);button.addEventListener('click',()=>openProject(p,button));const info=element('div','project-info');info.append(element('p','',p.city),element('h3','',p.name));const links=element('div','project-links');const disk=element('a','','Все ракурсы ↗');disk.href=diskUrl(p);disk.target='_blank';disk.rel='noopener';const download=element('a','','Скачать превью ↓');download.href=p.image;download.download=p.name;links.append(disk,download);info.append(links);card.append(button,info);grid.append(card)})}
+function renderProjects(){const query=$('#project-search').value.trim().toLocaleLowerCase('ru');const visible=projects.filter(p=>(city==='Все'||p.city===city)&&(`${p.name} ${p.city}`).toLocaleLowerCase('ru').includes(query));const grid=$('#project-grid');grid.replaceChildren();$('#project-empty').hidden=visible.length>0;visible.forEach((p,i)=>{const card=element('article','project-card');card.style.setProperty('--i',i);const button=element('button','project-image');button.setAttribute('aria-label','Посмотреть рендер: '+p.name);const img=element('img');img.src=p.image;img.alt='Рендер ЖК '+p.name;img.loading='lazy';img.width=800;img.height=600;button.append(img);button.addEventListener('click',()=>openProject(p,button));const info=element('div','project-info');info.append(element('p','',p.city),element('h3','',p.name));const links=element('div','project-links');const disk=element('a','','Все ракурсы ');disk.append(icon('up-right'));disk.href=diskUrl(p);disk.target='_blank';disk.rel='noopener';const download=element('a','','Скачать превью ');download.append(icon('down'));download.href=p.image;download.download=p.name;links.append(disk,download);info.append(links);card.append(button,info);grid.append(card)})}
 document.querySelectorAll('[data-city]').forEach(b=>b.addEventListener('click',()=>{city=b.dataset.city;document.querySelectorAll('[data-city]').forEach(button=>button.setAttribute('aria-pressed',String(b===button)));renderProjects()}));
 $('#project-search').addEventListener('input',renderProjects);
 // A critically damped spring keeps presentation and velocity when redirected.
@@ -101,3 +102,14 @@ if('IntersectionObserver' in window){
   document.querySelectorAll('main .section').forEach(section=>sectionObserver.observe(section));
 }
 renderProjects();
+// One entrance system: blocks rise once when they first enter the viewport.
+(()=>{
+  const targets=document.querySelectorAll('.heading,.logo-toolbar,.logo-item,.guidance,.swatch,.note,.type-workspace,.alphabet,.project-toolbar,.download-list>a,.footer-main');
+  if(!('IntersectionObserver' in window)||reduceMotion.matches){return}
+  const seen=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('in');seen.unobserve(entry.target)}}),{rootMargin:'0px 0px -8% 0px',threshold:.08});
+  targets.forEach(el=>{
+    const siblings=[...el.parentElement.children].filter(c=>c.matches('.logo-item,.swatch,.download-list>a'));
+    el.style.setProperty('--i',Math.max(0,siblings.indexOf(el)));
+    el.classList.add('reveal');seen.observe(el);
+  });
+})();
