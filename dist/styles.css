@@ -244,7 +244,7 @@ select{background:#fff;border-color:var(--line);color:var(--ink)}
 @media(pointer:coarse){.value-line{min-height:2.75rem;display:flex;align-items:center}}
 .color-caption p{display:none}
 .type-hint{font-size:.8125rem;color:var(--muted);margin:1rem 0 .25rem}
-.spec-sample{cursor:text}
+
 
 /* ---- Mobile menu: opens and closes with the same path. ---- */
 @media(max-width:768px){
@@ -256,7 +256,7 @@ select{background:#fff;border-color:var(--line);color:var(--ink)}
 .footer-main>a:first-child{display:block;padding-block:.25rem}
 .color-caption button[data-copy^="#"]{min-height:2.75rem}
 @media(max-width:768px){.value-line{min-height:2.75rem;display:flex;align-items:center}}
-.spec-sample{min-height:2.75rem}
+
 
 /* Fixes: value lines keep their own scale; menu and official button keep their breakpoints. */
 .color-caption .value-line,.swatch.main-color .color-caption .value-line{font-size:.8125rem;font-weight:400;letter-spacing:.012em;display:block;text-align:left;line-height:1.4;justify-content:flex-start}
@@ -265,3 +265,25 @@ select{background:#fff;border-color:var(--line);color:var(--ink)}
 .menu{display:none}
 @media(max-width:1150px){.official{display:none}}
 @media(max-width:768px){.menu{display:inline-flex;align-items:center}}
+
+/* ---- Palette: three colors with hex on top, grouped values beneath, same columns. ---- */
+.palette{grid-template-columns:1.6fr 1fr 1fr;grid-template-rows:auto;gap:1.25rem}
+.swatch,.swatch.main-color{grid-row:auto;grid-column:auto;min-height:17rem;padding:1.75rem}
+.swatch.main-color{padding:1.75rem}
+.palette-values{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:1.25rem;margin-top:1.25rem}
+.values-card{background:#fff;border-radius:var(--r);padding:1.25rem 1.5rem 1rem}
+.values-card h3{font-size:.8125rem;font-weight:500;color:var(--muted);margin-bottom:.35rem;letter-spacing:.012em}
+.values-card .value-line{display:block;width:100%;min-height:2.125rem;padding:.25rem 0;font-size:.9375rem;color:var(--ink);text-align:left;line-height:1.35}
+@media(hover:hover) and (pointer:fine){.values-card .value-line:hover{opacity:.6}}
+.main-color .color-caption button[data-copy^="#"]{font-size:clamp(2.25rem,5vw,4.5rem)}
+.swatch:not(.main-color) .color-caption button[data-copy^="#"]{font-size:clamp(1.25rem,2.2vw,2rem)}
+@media(max-width:768px){
+  .palette{grid-template-columns:1fr 1fr;gap:.75rem}
+  .swatch.main-color{grid-column:1/-1;min-height:11rem;padding:1.25rem}
+  .swatch{min-height:8.5rem;padding:1.1rem}
+  .palette-values{grid-template-columns:1fr;gap:.75rem;margin-top:.75rem}
+  .values-card{padding:1rem 1.25rem .75rem}
+  .values-card .value-line{min-height:2.125rem}
+  .main-color .color-caption button[data-copy^="#"]{font-size:clamp(2.25rem,12vw,3rem)}
+  .swatch:not(.main-color) .color-caption button[data-copy^="#"]{font-size:1.125rem}
+}

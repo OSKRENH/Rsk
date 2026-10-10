@@ -49,17 +49,6 @@ document.querySelectorAll('[data-logo-key]').forEach(card=>{
     stage.classList.toggle('desc-on',descriptor);update();
   });
 });
-// Specimens are editable plain text. Where plaintext-only is unsupported, fall back to true and strip pasted markup.
-document.querySelectorAll('.spec-sample').forEach(sample=>{
-  sample.contentEditable='plaintext-only';
-  if(sample.contentEditable!=='plaintext-only'){
-    sample.contentEditable='true';
-    sample.addEventListener('paste',e=>{
-      e.preventDefault();const selection=getSelection();if(!selection.rangeCount)return;
-      selection.deleteFromDocument();selection.getRangeAt(0).insertNode(document.createTextNode(e.clipboardData.getData('text/plain')));selection.collapseToEnd();
-    });
-  }
-});
 const projects=[
 {name:'Центральный квартал',city:'Луганск',image:'assets/central.webp',small:'assets/central-600.webp',w:1200,slug:'zhk-tsentralnyy-kvartal',folder:'Центральный квартал'},
 {name:'Кленовая аллея',city:'Мариуполь',image:'assets/klen.webp',small:'assets/klen-600.webp',w:1200,slug:'zhk-klenovaya-alleya',folder:'Кленовая Аллея'},
