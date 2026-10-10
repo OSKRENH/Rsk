@@ -150,7 +150,7 @@ body::before{content:'';position:fixed;inset:0 0 auto 0;height:6.25rem;z-index:2
 dialog>img{touch-action:none;cursor:grab;-webkit-user-drag:none;user-select:none}dialog>img:active{cursor:grabbing}
 .dialog-grab{position:absolute;top:.6rem;left:50%;width:2.5rem;height:.3rem;margin-left:-1.25rem;border-radius:99px;background:rgb(255 255 255 / .9);z-index:1;pointer-events:none}
 
-p,li,h1,h2,h3{text-wrap:pretty}.heading h2,.hero h1,.intro,.dialog-info h2{text-wrap:balance}
+.heading h2,.hero h1,.dialog-info h2{text-wrap:balance}
 
 /* Full logo: block and descriptor are separate groups. The descriptor slides out of the block's right edge
    (clipped to it) while the whole mark shifts left; hidden, it slides back left and the block settles at the center.
@@ -302,3 +302,10 @@ select{background:#fff;border-color:var(--line);color:var(--ink)}
   .swatch{min-height:15rem;padding:1.1rem;gap:1.25rem}
   .swatch .value-line{font-size:.875rem;min-height:2.125rem}
 }
+
+/* Type section: no meta row; the specimens list starts right under the heading. */
+.type-workspace{border-top:0;padding-top:0}
+.specimens{margin-top:0}
+/* Logo color dots: tighter group. The hit area stays tall; horizontally 30px per dot. */
+.card-tone-switch{padding-inline:.4rem}
+.card-tone-switch button{width:30px;min-width:30px;height:44px}
