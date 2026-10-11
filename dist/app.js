@@ -213,7 +213,8 @@ function springStep(now) {
   progress = target + (displacement + coefficient * dt) * decay;
   velocity = (velocity - omega * coefficient * dt) * decay;
   presentDialog();
-  if (Math.abs(progress - target) < .001 && Math.abs(velocity) < .01) settleDialog();
+  // Below 0.3% opacity nothing is visible any more, so the dialog can close without waiting for the spring's long tail.
+  if (Math.abs(progress - target) < .003 && Math.abs(velocity) < .05) settleDialog();
   else frame = requestAnimationFrame(springStep);
 }
 function moveDialog(next) {
