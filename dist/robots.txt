@@ -1,2 +1,3 @@
 User-agent: *
 Allow: /
+Sitemap: https://rsk.ivankamaldinov.workers.dev/sitemap.xml
