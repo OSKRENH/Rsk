@@ -137,7 +137,7 @@ function renderProjects({animate = false, announce = true} = {}) {
     card.style.setProperty('--i', i);
     const button = element('button', 'project-image');
     button.type = 'button';
-    button.setAttribute('aria-label', 'Посмотреть рендер: ' + p.name);
+    button.setAttribute('aria-label', 'Посмотреть рендер: ' + p.name + ', ' + p.city);
     const img = element('img');
     img.src = p.image;
     img.srcset = `${p.small} 600w, ${p.image} ${p.w}w`;
@@ -147,10 +147,10 @@ function renderProjects({animate = false, announce = true} = {}) {
     img.decoding = 'async';
     img.width = 800;
     img.height = 600;
-    button.append(img);
+    button.append(img, element('span', 'project-city', p.city));
     button.addEventListener('click', () => openProject(p, button));
     const info = element('div', 'project-info');
-    info.append(element('p', '', p.city), element('h3', '', p.name));
+    info.append(element('h3', '', p.name));
     const links = element('div', 'project-links');
     const disk = element('a', '', 'Все ракурсы ');
     disk.append(element('span', 'sr-only', NEW_TAB), icon('up-right'));
