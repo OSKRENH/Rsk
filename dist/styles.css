@@ -195,6 +195,11 @@ html:not(.js) .project-toolbar{display:none}
 /* ---- Map ---- */
 .map-frame{background:#f0f4f9;border-radius:var(--r-lg);overflow:hidden;aspect-ratio:1328/580}
 .map-frame picture,.map-frame img{display:block;width:100%;height:100%}
+.map-frame{container-type:inline-size;position:relative}
+.map-stat{position:absolute;z-index:1;left:4.5cqw;top:50%;transform:translateY(-50%);display:grid;grid-template-columns:auto auto;column-gap:2.2cqw;align-items:start;color:var(--blue);pointer-events:none}
+.map-stat b{grid-row:1/3;font-size:25cqw;line-height:.78;font-weight:400;letter-spacing:-.04em}
+.map-stat span{font-size:5.6cqw;line-height:1;text-transform:uppercase;font-weight:400;letter-spacing:-.02em;padding-top:.6cqw}
+.map-stat small{align-self:end;max-width:11ch;font-size:1.9cqw;line-height:1.25;text-transform:uppercase;font-weight:500;color:var(--ink);letter-spacing:0;padding-left:5cqw}
 .map-links{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;margin-top:1.25rem;padding-inline:.5rem;font-size:.8125rem;color:var(--muted)}
 .map-links div{display:flex;flex-wrap:wrap;gap:1.75rem}
 
@@ -273,6 +278,7 @@ dialog>img:active{cursor:grabbing}
 /* ---- Small tablet: two columns stay readable down to 601px ---- */
 @media(max-width:900px){
   .map-frame{aspect-ratio:740/502}
+  .map-stat{display:none}
 }
 
 /* ---- Small tablet: the cover stacks ---- */
