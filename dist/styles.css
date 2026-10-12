@@ -54,9 +54,10 @@ body::before{content:'';position:fixed;inset:0 0 auto 0;height:6.25rem;z-index:2
 
 /* ---- Cover ---- */
 .hero{background:var(--blue);min-height:100svh;position:relative;overflow:clip;color:#fff}
-.hero-inner{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;gap:2.5rem;padding-block:8rem 4.5rem}
+.hero-inner{min-height:100svh;display:flex;flex-direction:column;justify-content:space-between;gap:2.5rem;padding-block:8rem 4.5rem}
+.hero-kicker{font-size:.875rem;font-weight:500;letter-spacing:.012em;margin-bottom:1rem}
 .hero-bottom{display:flex;flex-direction:column;align-items:flex-start;gap:2rem}
-.hero h1{font-size:clamp(2.25rem,6.66vw,5.625rem);line-height:.98;letter-spacing:-.04em;margin-bottom:1.25rem;text-wrap:balance}
+.hero h1{font-size:clamp(2.25rem,6.66vw,5.625rem);line-height:.98;letter-spacing:-.04em;text-wrap:balance}
 .intro{font-size:1.125rem;line-height:1.5;max-width:34ch;font-weight:500;text-wrap:balance}
 .hero-actions{display:flex;align-items:center;gap:1rem}
 .button{display:inline-flex;align-items:center;gap:.9rem;border-radius:99px;background:var(--ink);color:#fff;font-size:.8438rem;font-weight:500;padding:1.1rem 1.6rem;white-space:nowrap;transition:transform .3s var(--ease),background .2s}
@@ -224,8 +225,8 @@ dialog>img:active{cursor:grabbing}
 
 /* ---- Motion: one entrance system, always from a visible default when JS is off ---- */
 @keyframes rise{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
-.hero-copy{animation:rise .7s var(--ease) .1s both}
-.hero-actions{animation:rise .7s var(--ease) .18s both}
+.hero-top{animation:rise .7s var(--ease) .1s both}
+.hero-bottom{animation:rise .7s var(--ease) .18s both}
 .js .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s var(--ease),transform .6s var(--ease);transition-delay:calc(var(--i,0)*80ms)}
 .js .reveal.in{opacity:1;transform:none}
 
@@ -285,6 +286,7 @@ dialog>img:active{cursor:grabbing}
   .topbar nav a{padding:.9rem 1rem;font-size:.9rem}
   .hero-inner{padding-block:6rem 2.5rem;gap:1.75rem}
   .hero h1{font-size:clamp(2.25rem,11.25vw,3.6rem)}
+  .hero-kicker{font-size:.8125rem;margin-bottom:.75rem}
   .hero-bottom{gap:1.5rem}
   .intro{font-size:.9563rem}
   .hero-actions{flex-wrap:wrap}
@@ -350,7 +352,7 @@ dialog>img:active{cursor:grabbing}
   @keyframes fade{from{opacity:0}to{opacity:1}}
   html.smooth{scroll-behavior:auto}
   *,*::before,*::after{animation:none!important;transition-property:opacity,background-color,color,fill,outline-color!important;transition-duration:.2s!important;transition-delay:0s!important}
-  .hero-copy,.hero-actions,.project-card.enter{animation:fade .25s ease both!important}
+  .hero-top,.hero-bottom,.project-card.enter{animation:fade .25s ease both!important}
   .js .reveal{opacity:0;transform:none;transition:opacity .25s ease!important}
   .js .reveal.in{opacity:1}
   .lg-desc{opacity:1}
