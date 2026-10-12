@@ -57,10 +57,10 @@ body::before{content:'';position:fixed;inset:0 0 auto 0;height:6.25rem;z-index:2
    (two equal columns, 1.25rem gap), so the right column starts exactly where the second logo card starts. */
 .hero{padding-top:8.25rem}
 #logos{padding-top:3rem}
-.hero-inner{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2.5rem 1.25rem;align-items:end;width:calc(100% - 3rem);max-width:1376px;padding:4.5rem 3.5rem;background:var(--blue);color:#fff;border-radius:var(--r-lg)}
-.hero-bottom{display:flex;flex-direction:column;align-items:flex-start;gap:2rem;padding-bottom:.4rem}
-.hero h1{font-size:clamp(2.25rem,5.04vw,4.5rem);line-height:1;letter-spacing:-.04em;text-wrap:balance}
-.intro{font-size:1.125rem;line-height:1.5;max-width:40ch;font-weight:500;text-wrap:balance}
+.hero-inner{--t:clamp(2.25rem,5.04vw,4.5rem);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2.5rem 1.25rem;align-items:end;width:calc(100% - 3rem);max-width:1376px;padding:3rem 3.5rem;background:var(--blue);color:#fff;border-radius:var(--r-lg)}
+.hero-bottom{display:flex;flex-direction:column;align-items:flex-start;gap:max(1rem,calc(var(--t)*1.7 - 92px));margin-bottom:calc(var(--t)*.12)}
+.hero h1{font-size:var(--t);line-height:1;letter-spacing:-.04em;text-wrap:balance}
+.intro{font-size:.875rem;line-height:1.5;max-width:40ch;font-weight:400;text-wrap:balance}
 .hero-actions{display:flex;align-items:center;gap:1rem}
 .button{display:inline-flex;align-items:center;gap:.9rem;border-radius:99px;background:var(--ink);color:#fff;font-size:.8438rem;font-weight:500;padding:1.1rem 1.6rem;white-space:nowrap;transition:transform .3s var(--ease),background .2s}
 .button:active{transform:scale(.96);transition-duration:.08s}
@@ -277,7 +277,7 @@ dialog>img:active{cursor:grabbing}
 /* ---- Small tablet: the cover stacks ---- */
 @media(max-width:900px){
   .hero-inner{grid-template-columns:1fr;gap:2.25rem;align-items:start;padding:3.5rem 2.5rem}
-  .hero-bottom{padding-bottom:0}
+  .hero-bottom{margin-bottom:0;gap:2rem}
   .intro{max-width:none}
 }
 
