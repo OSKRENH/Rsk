@@ -33,7 +33,7 @@ for (const url of urls) {
 // Project data: six projects, each with both image sizes on disk.
 const images = [...app.matchAll(/\bimage:\s*'([^']+)'/g)].map(m => m[1]);
 const smalls = [...app.matchAll(/\bsmall:\s*'([^']+)'/g)].map(m => m[1]);
-if (images.length !== 6 || smalls.length !== 6) fail(`Expected 6 projects, found ${images.length} images and ${smalls.length} previews`);
+if (images.length !== 6 || smalls.length !== 6) fail(`Expected 6 projects, found ${images.length} images and ${smalls.length} small images`);
 for (const file of [...images, ...smalls]) if (!exists(file)) fail('Missing project image ' + file);
 
 // Fonts referenced by the stylesheet.
@@ -42,7 +42,7 @@ for (const m of css.matchAll(/url\('([^']+)'\)/g)) if (!exists(m[1])) fail('Miss
 // Files the page, the manifest and crawlers expect.
 for (const file of ['_headers', 'robots.txt', 'sitemap.xml', 'site.webmanifest', 'assets/og.png', 'assets/favicon-32.png',
   'assets/apple-touch-icon.png', 'assets/icon-192.png', 'assets/icon-512.png', 'assets/rsk-map.png',
-  'downloads/RSK_Brand_Kit.zip', 'downloads/RSK_Logos.zip', 'downloads/RSK_Fonts.zip', 'downloads/RSK_Project_Previews.zip']) {
+  'downloads/RSK_Brand_Kit.zip', 'downloads/RSK_Logos.zip', 'downloads/RSK_Fonts.zip']) {
   if (!exists(file)) fail('Missing ' + file);
 }
 

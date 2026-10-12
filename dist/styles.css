@@ -173,9 +173,9 @@ body::before{content:'';position:fixed;inset:0 0 auto 0;height:6.25rem;z-index:2
 .project-image::after{content:'';position:absolute;right:1rem;bottom:1rem;width:3rem;height:3rem;border-radius:50%;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230b1b26' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 17 17 7M8.5 7H17v8.5'/%3E%3C/svg%3E") center/1.4rem no-repeat;transition:transform .35s var(--ease),background-color .2s}
 .project-image:active{transform:scale(.99);transition:transform .08s}
 .project-city{position:absolute;z-index:1;left:1rem;top:1rem;padding:.55rem 1rem;border-radius:99px;background:rgb(11 27 38 / .42);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);color:#fff;font-size:.8125rem;font-weight:500;line-height:1.2}
-.project-info{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:.35rem 1.5rem;padding:.75rem .5rem 0}
-.project-info h3{order:1;font-size:1.35rem;letter-spacing:-.035em}
-.project-links{order:3;flex-basis:100%;display:flex;flex-wrap:wrap;gap:0 1.5rem}
+.project-info{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.35rem 1.5rem;padding:.25rem .5rem 0}
+.project-info h3{font-size:1.35rem;letter-spacing:-.035em}
+.project-links{display:flex;flex-wrap:wrap;gap:0 1.5rem}
 .empty{display:flex;flex-direction:column;align-items:flex-start;gap:.25rem;padding:2rem 0 3rem;color:var(--muted)}
 button.text-link{background:none;padding:0;color:var(--ink)}
 .noscript{grid-column:1/-1;color:var(--muted)}

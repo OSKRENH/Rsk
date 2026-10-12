@@ -157,11 +157,7 @@ function renderProjects({animate = false, announce = true} = {}) {
     disk.href = diskUrl(p);
     disk.target = '_blank';
     disk.rel = 'noopener';
-    const download = element('a', '', 'Скачать превью ');
-    download.append(icon('down'));
-    download.href = p.image;
-    download.download = p.name + '.webp';
-    links.append(disk, download);
+    links.append(disk);
     info.append(links);
     card.append(button, info);
     grid.append(card);
