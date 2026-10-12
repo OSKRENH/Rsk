@@ -53,10 +53,10 @@ input{caret-color:var(--blue)}
 body::before{content:'';position:fixed;inset:0 0 auto 0;height:6.25rem;z-index:20;pointer-events:none;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);-webkit-mask-image:linear-gradient(#000 45%,transparent);mask-image:linear-gradient(#000 45%,transparent)}
 
 /* ---- Cover ---- */
-/* The cover is an inset brand-blue panel like the Files block, two columns: title on the left, the rest on the right. */
+/* The cover is an inset brand-blue panel like the Files block. Its two columns use the same grid as the logo cards
+   (two equal columns, 1.25rem gap), so the right column starts exactly where the second logo card starts. */
 .hero{padding-top:6.25rem}
-.hero-inner{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:2.5rem 4rem;align-items:end;width:calc(100% - 3rem);max-width:1392px;padding:4.5rem 3.5rem;background:var(--blue);color:#fff;border-radius:var(--r-lg)}
-.hero-kicker{font-size:1.125rem;font-weight:500;letter-spacing:.012em;margin-bottom:1rem}
+.hero-inner{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2.5rem 1.25rem;align-items:end;width:calc(100% - 3rem);max-width:1392px;padding:4.5rem 3.5rem;background:var(--blue);color:#fff;border-radius:var(--r-lg)}
 .hero-bottom{display:flex;flex-direction:column;align-items:flex-start;gap:2rem;padding-bottom:.4rem}
 .hero h1{font-size:clamp(2.5rem,5.6vw,5.25rem);line-height:.98;letter-spacing:-.04em;text-wrap:balance}
 .intro{font-size:1.125rem;line-height:1.5;max-width:40ch;font-weight:500;text-wrap:balance}
@@ -294,8 +294,7 @@ dialog>img:active{cursor:grabbing}
   .hero{padding-top:5rem}
   .hero-inner{width:calc(100% - 1rem);padding:2.25rem 1.25rem 2rem;gap:1.75rem;border-radius:2rem}
   .hero h1{font-size:clamp(2.25rem,11.25vw,3.6rem)}
-  .hero-kicker{margin-bottom:.75rem}
-  .hero-bottom{gap:1.5rem}
+    .hero-bottom{gap:1.5rem}
   .hero-actions{flex-wrap:wrap;gap:.75rem}
   .button{padding:1rem 1.15rem;font-size:.7875rem;gap:.7rem}
   .hero-link{padding:calc(1rem - 1px) 1.1rem;font-size:.7875rem}
