@@ -283,6 +283,7 @@ dialog>img:active{cursor:grabbing}
 @media(max-width:900px){
   .hero-inner{grid-template-columns:1fr;gap:2.25rem;align-items:start;padding:3.5rem 2.5rem}
   .hero-bottom{padding-bottom:0}
+  .intro{max-width:none}
 }
 
 /* ---- Phone ---- */
