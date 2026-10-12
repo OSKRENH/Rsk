@@ -54,7 +54,10 @@ body::before{content:'';position:fixed;inset:0 0 auto 0;height:6.25rem;z-index:2
 
 /* ---- Cover ---- */
 .hero{background:var(--blue);min-height:100svh;position:relative;overflow:clip;color:#fff}
-.hero-inner{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;gap:2.5rem;padding-block:8rem 4.5rem}
+/* Waving cloth behind the cover: a canvas painted by flag.js. The flat brand blue stays underneath as the fallback. */
+.hero-flag{position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity 1.2s var(--ease);pointer-events:none}
+.hero.flag-on .hero-flag{opacity:1}
+.hero-inner{position:relative;z-index:1;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;gap:2.5rem;padding-block:8rem 4.5rem}
 .hero-bottom{display:flex;flex-direction:column;align-items:flex-start;gap:2rem}
 .hero h1{font-size:clamp(2.25rem,6.66vw,5.625rem);line-height:.98;letter-spacing:-.04em;margin-bottom:1.25rem;text-wrap:balance}
 .intro{font-size:1.125rem;line-height:1.5;max-width:34ch;font-weight:500;text-wrap:balance}
@@ -368,7 +371,7 @@ dialog>img:active{cursor:grabbing}
 }
 @media print{
   *{print-color-adjust:exact;-webkit-print-color-adjust:exact}
-  .topbar,body::before,.skip,.toast,dialog,.hero-actions,.project-toolbar,.card-tone-switch,.desc-switch{display:none!important}
+  .topbar,body::before,.hero-flag,.skip,.toast,dialog,.hero-actions,.project-toolbar,.card-tone-switch,.desc-switch{display:none!important}
   .hero,.hero-inner{min-height:auto}
   .hero-inner{padding-block:3rem}
   .js .reveal{opacity:1;transform:none}
