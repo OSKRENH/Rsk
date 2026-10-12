@@ -55,10 +55,10 @@ body::before{content:'';position:fixed;inset:0 0 auto 0;height:6.25rem;z-index:2
 /* ---- Cover ---- */
 .hero{background:var(--blue);min-height:100svh;position:relative;overflow:clip;color:#fff}
 .hero-inner{min-height:100svh;display:flex;flex-direction:column;justify-content:space-between;gap:2.5rem;padding-block:8rem 4.5rem}
-.hero-kicker{font-size:.875rem;font-weight:500;letter-spacing:.012em;margin-bottom:1rem}
+.hero-kicker{font-size:1.125rem;font-weight:500;letter-spacing:.012em;margin-bottom:1rem}
 .hero-bottom{display:flex;flex-direction:column;align-items:flex-start;gap:2rem}
 .hero h1{font-size:clamp(2.25rem,6.66vw,5.625rem);line-height:.98;letter-spacing:-.04em;text-wrap:balance}
-.intro{font-size:1.125rem;line-height:1.5;max-width:34ch;font-weight:500;text-wrap:balance}
+.intro{font-size:1.125rem;line-height:1.5;max-width:40ch;font-weight:500;text-wrap:balance}
 .hero-actions{display:flex;align-items:center;gap:1rem}
 .button{display:inline-flex;align-items:center;gap:.9rem;border-radius:99px;background:var(--ink);color:#fff;font-size:.8438rem;font-weight:500;padding:1.1rem 1.6rem;white-space:nowrap;transition:transform .3s var(--ease),background .2s}
 .button:active{transform:scale(.96);transition-duration:.08s}
@@ -286,9 +286,8 @@ dialog>img:active{cursor:grabbing}
   .topbar nav a{padding:.9rem 1rem;font-size:.9rem}
   .hero-inner{padding-block:6rem 2.5rem;gap:1.75rem}
   .hero h1{font-size:clamp(2.25rem,11.25vw,3.6rem)}
-  .hero-kicker{font-size:.8125rem;margin-bottom:.75rem}
+  .hero-kicker{margin-bottom:.75rem}
   .hero-bottom{gap:1.5rem}
-  .intro{font-size:.9563rem}
   .hero-actions{flex-wrap:wrap}
   .button{padding:1rem 1.35rem;font-size:.7875rem}
   .hero-link{padding:calc(1rem - 1px) 1.2rem;font-size:.7875rem}
