@@ -53,11 +53,12 @@ input{caret-color:var(--blue)}
 body::before{content:'';position:fixed;inset:0 0 auto 0;height:6.25rem;z-index:20;pointer-events:none;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);-webkit-mask-image:linear-gradient(#000 45%,transparent);mask-image:linear-gradient(#000 45%,transparent)}
 
 /* ---- Cover ---- */
-.hero{background:var(--blue);min-height:100svh;position:relative;overflow:clip;color:#fff}
-.hero-inner{min-height:100svh;display:flex;flex-direction:column;justify-content:space-between;gap:2.5rem;padding-block:8rem 4.5rem}
+/* The cover is an inset brand-blue panel like the Files block, two columns: title on the left, the rest on the right. */
+.hero{padding-top:6.25rem}
+.hero-inner{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:2.5rem 4rem;align-items:end;width:calc(100% - 3rem);max-width:1392px;padding:4.5rem 3.5rem;background:var(--blue);color:#fff;border-radius:var(--r-lg)}
 .hero-kicker{font-size:1.125rem;font-weight:500;letter-spacing:.012em;margin-bottom:1rem}
-.hero-bottom{display:flex;flex-direction:column;align-items:flex-start;gap:2rem}
-.hero h1{font-size:clamp(2.25rem,6.66vw,5.625rem);line-height:.98;letter-spacing:-.04em;text-wrap:balance}
+.hero-bottom{display:flex;flex-direction:column;align-items:flex-start;gap:2rem;padding-bottom:.4rem}
+.hero h1{font-size:clamp(2.5rem,5.6vw,5.25rem);line-height:.98;letter-spacing:-.04em;text-wrap:balance}
 .intro{font-size:1.125rem;line-height:1.5;max-width:40ch;font-weight:500;text-wrap:balance}
 .hero-actions{display:flex;align-items:center;gap:1rem}
 .button{display:inline-flex;align-items:center;gap:.9rem;border-radius:99px;background:var(--ink);color:#fff;font-size:.8438rem;font-weight:500;padding:1.1rem 1.6rem;white-space:nowrap;transition:transform .3s var(--ease),background .2s}
@@ -273,6 +274,12 @@ dialog>img:active{cursor:grabbing}
   .map-frame{aspect-ratio:740/502}
 }
 
+/* ---- Small tablet: the cover stacks ---- */
+@media(max-width:900px){
+  .hero-inner{grid-template-columns:1fr;gap:2.25rem;align-items:start;padding:3.5rem 2.5rem}
+  .hero-bottom{padding-bottom:0}
+}
+
 /* ---- Phone ---- */
 @media(max-width:768px){
   html{scroll-padding-top:5.5rem}
@@ -284,13 +291,14 @@ dialog>img:active{cursor:grabbing}
   .topbar nav{position:absolute;top:calc(100% + .5rem);left:0;right:0;flex-direction:column;gap:0;padding:.6rem;background:#fff;border-radius:15px;visibility:hidden;opacity:0;transform:translateY(-6px) scale(.98);transform-origin:95% 0;pointer-events:none;transition:opacity .2s var(--ease),transform .25s var(--ease),visibility 0s linear .25s}
   .topbar nav.open{visibility:visible;opacity:1;transform:none;pointer-events:auto;transition-delay:0s}
   .topbar nav a{padding:.9rem 1rem;font-size:.9rem}
-  .hero-inner{padding-block:6rem 2.5rem;gap:1.75rem}
+  .hero{padding-top:5rem}
+  .hero-inner{width:calc(100% - 1rem);padding:2.25rem 1.25rem 2rem;gap:1.75rem;border-radius:2rem}
   .hero h1{font-size:clamp(2.25rem,11.25vw,3.6rem)}
   .hero-kicker{margin-bottom:.75rem}
   .hero-bottom{gap:1.5rem}
-  .hero-actions{flex-wrap:wrap}
-  .button{padding:1rem 1.35rem;font-size:.7875rem}
-  .hero-link{padding:calc(1rem - 1px) 1.2rem;font-size:.7875rem}
+  .hero-actions{flex-wrap:wrap;gap:.75rem}
+  .button{padding:1rem 1.15rem;font-size:.7875rem;gap:.7rem}
+  .hero-link{padding:calc(1rem - 1px) 1.1rem;font-size:.7875rem}
   .section{padding-block:5rem 0}
   .heading{margin-bottom:2.25rem}
   .heading h2{font-size:clamp(1.75rem,9.4vw,2.925rem)}
@@ -322,6 +330,13 @@ dialog>img:active{cursor:grabbing}
   .footer-bottom{flex-direction:column;gap:1rem;margin-top:2.5rem}
   .dialog-info{padding:1.5rem}
   .dialog-links{flex-direction:column;align-items:flex-start;gap:1.25rem}
+}
+
+/* ---- Compact phones: the two cover buttons keep one row ---- */
+@media(max-width:380px){
+  .hero-inner{padding-inline:1rem}
+  .hero .button{padding-inline:1rem}
+  .hero-link{padding-inline:.9rem}
 }
 
 /* ---- Narrow phone: single column ---- */
@@ -370,7 +385,7 @@ dialog>img:active{cursor:grabbing}
 @media print{
   *{print-color-adjust:exact;-webkit-print-color-adjust:exact}
   .topbar,body::before,.skip,.toast,dialog,.hero-actions,.project-toolbar,.card-tone-switch,.desc-switch{display:none!important}
-  .hero,.hero-inner{min-height:auto}
+  .hero{padding-top:0}
   .hero-inner{padding-block:3rem}
   .js .reveal{opacity:1;transform:none}
   .swatch,.logo-item,.project-card,.specimen,.download-list>a,.map-frame{break-inside:avoid}

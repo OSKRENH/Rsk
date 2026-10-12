@@ -322,7 +322,8 @@ if ('IntersectionObserver' in window) {
       else link.removeAttribute('aria-current');
     });
   }, {rootMargin: '-15% 0px -55% 0px', threshold: 0});
-  document.querySelectorAll('main .section').forEach(section => sectionObserver.observe(section));
+  // The cover is observed too, so no navigation item is highlighted while it fills the screen.
+  document.querySelectorAll('main .hero, main .section').forEach(section => sectionObserver.observe(section));
 }
 
 renderProjects({animate: true, announce: false});
