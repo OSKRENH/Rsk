@@ -56,7 +56,7 @@ body::before{content:'';position:fixed;inset:0 0 auto 0;height:6.25rem;z-index:2
 /* The cover is an inset brand-blue panel like the Files block. Its two columns use the same grid as the logo cards
    (two equal columns, 1.25rem gap), so the right column starts exactly where the second logo card starts. */
 .hero{padding-top:6.25rem}
-.hero-inner{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2.5rem 1.25rem;align-items:end;width:calc(100% - 3rem);max-width:1392px;padding:4.5rem 3.5rem;background:var(--blue);color:#fff;border-radius:var(--r-lg)}
+.hero-inner{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2.5rem 1.25rem;align-items:end;width:calc(100% - 3rem);max-width:1376px;padding:4.5rem 3.5rem;background:var(--blue);color:#fff;border-radius:var(--r-lg)}
 .hero-bottom{display:flex;flex-direction:column;align-items:flex-start;gap:2rem;padding-bottom:.4rem}
 .hero h1{font-size:clamp(2.5rem,5.6vw,5.25rem);line-height:.98;letter-spacing:-.04em;text-wrap:balance}
 .intro{font-size:1.125rem;line-height:1.5;max-width:40ch;font-weight:500;text-wrap:balance}
@@ -180,7 +180,7 @@ button.text-link{background:none;padding:0;color:var(--ink)}
 html:not(.js) .project-toolbar{display:none}
 
 /* ---- Files: the second brand-blue block ---- */
-#downloads{background:var(--blue);color:#fff;border-radius:var(--r-lg);width:calc(100% - 3rem);max-width:1392px;margin:8rem auto 0;padding:6rem 3.5rem 4.5rem}
+#downloads{background:var(--blue);color:#fff;border-radius:var(--r-lg);width:calc(100% - 3rem);max-width:1376px;margin:8rem auto 0;padding:6rem 3.5rem 4.5rem}
 #downloads .heading p{color:rgb(255 255 255 / .94)}
 .download-list{border-top:1.5px solid rgb(255 255 255 / .6)}
 .download-list>a{display:flex;align-items:center;justify-content:space-between;gap:2rem;padding:1.9rem 0;border-bottom:1.5px solid rgb(255 255 255 / .6)}
