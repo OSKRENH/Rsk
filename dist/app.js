@@ -125,12 +125,10 @@ function projectCount(n) {
   return n ? 'Показано ' + n + ' ' + word : 'Проектов не найдено';
 }
 function renderProjects({animate = false, announce = true} = {}) {
-  const query = $('#project-search').value.trim().toLocaleLowerCase('ru');
-  const visible = projects.filter(p => (city === 'Все' || p.city === city) && `${p.name} ${p.city}`.toLocaleLowerCase('ru').includes(query));
+  const visible = projects.filter(p => city === 'Все' || p.city === city);
   const grid = $('#project-grid');
   grid.replaceChildren();
   grid.dataset.count = visible.length;
-  $('#project-empty').hidden = visible.length > 0;
   if (announce) $('#project-count').textContent = projectCount(visible.length);
   visible.forEach((p, i) => {
     const card = element('article', animate ? 'project-card enter' : 'project-card');
@@ -171,13 +169,6 @@ document.querySelectorAll('[data-city]').forEach(button => button.addEventListen
   setCity(button.dataset.city);
   renderProjects({animate: true});
 }));
-$('#project-search').addEventListener('input', () => renderProjects());
-$('#project-reset').addEventListener('click', () => {
-  $('#project-search').value = '';
-  setCity('Все');
-  renderProjects({animate: true});
-  document.querySelector('[data-city="Все"]').focus({preventScroll: true});
-});
 
 // ---- Project viewer: a critically damped spring keeps presentation and velocity when redirected ----
 const dialog = $('#project-dialog');

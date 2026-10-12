@@ -158,9 +158,6 @@ body::before{content:'';position:fixed;inset:0 0 auto 0;height:6.25rem;z-index:2
 .filters button{min-height:2.75rem;font-size:.7875rem;font-weight:500;padding:.65rem 1.1rem;border-radius:99px;background:#fff;outline:1px solid var(--line);outline-offset:-1px;transition:background .2s,color .2s,transform .2s var(--ease)}
 .filters button[aria-pressed=true]{background:var(--ink);color:#fff}
 .filters button:active{transform:scale(.96)}
-#project-search{width:14rem;min-width:11rem;min-height:2.75rem;padding:.7rem 1.1rem;border:0;border-radius:99px;background:#fff;outline:1px solid var(--line);outline-offset:-1px;font-size:.7875rem}
-#project-search::placeholder{color:var(--muted);opacity:1}
-#project-search:focus-visible{outline:2px solid var(--ink)}
 .project-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:2.5rem 1.25rem;margin-bottom:2.5rem}
 /* The mosaic follows the number of results (data-count), so a filter never leaves an empty cell. */
 .project-card{grid-column:span 4;min-width:0;--h:clamp(14rem,21vw,19rem)}
@@ -176,7 +173,6 @@ body::before{content:'';position:fixed;inset:0 0 auto 0;height:6.25rem;z-index:2
 .project-info{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.35rem 1.5rem;padding:.25rem .5rem 0}
 .project-info h3{font-size:1.35rem;letter-spacing:-.035em}
 .project-links{display:flex;flex-wrap:wrap;gap:0 1.5rem}
-.empty{display:flex;flex-direction:column;align-items:flex-start;gap:.25rem;padding:2rem 0 3rem;color:var(--muted)}
 button.text-link{background:none;padding:0;color:var(--ink)}
 .noscript{grid-column:1/-1;color:var(--muted)}
 html:not(.js) .project-toolbar{display:none}
@@ -264,8 +260,7 @@ dialog>img:active{cursor:grabbing}
   .topbar nav a{padding:.55rem .8rem}
   #downloads{padding-inline:2rem}
   .project-toolbar{flex-direction:column;align-items:stretch}
-  #project-search{width:100%}
-  .project-grid[data-count] .project-card:nth-child(n){grid-column:span 6;--h:clamp(14rem,30vw,20rem)}
+    .project-grid[data-count] .project-card:nth-child(n){grid-column:span 6;--h:clamp(14rem,30vw,20rem)}
   .project-grid[data-count] .project-card:nth-child(-n+2){--h:clamp(16rem,36vw,24rem)}
   .project-grid[data-count] .project-card:last-child:nth-child(odd){grid-column:1/-1}
   .palette{grid-template-columns:repeat(2,minmax(0,1fr))}
