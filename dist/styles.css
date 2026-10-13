@@ -135,6 +135,7 @@ body::before{content:'';position:fixed;inset:0 0 auto 0;height:6.25rem;z-index:2
 .value-line,.color-caption button{font-variant-numeric:tabular-nums}
 .value-line{display:block;width:100%;min-height:1.75rem;padding:.15rem 0;background:none;font-size:var(--fs-s);font-weight:400;line-height:1.35;letter-spacing:.012em;color:inherit;text-align:left}
 .value-line:active{opacity:.6}
+.colors-download{margin-top:1.5rem}
 .note{font-size:var(--fs-xs);color:var(--muted);margin-top:1.25rem;letter-spacing:.012em}
 
 /* ---- Typography ---- */
