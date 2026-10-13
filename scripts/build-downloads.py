@@ -92,7 +92,7 @@ open(P('source-assets/colors/RSK_Colors.svg'), 'w', encoding='utf8').write(color
 open(P('source-assets/colors/RSK_Colors.ase'), 'wb').write(colors_ase())
 open(P('source-assets/colors/RSK_Colors.txt'), 'w', encoding='utf8').write(colors_txt())
 colors = [(n, read(P('source-assets/colors', n))) for n in ('RSK_Colors.ase', 'RSK_Colors.svg', 'RSK_Colors.png', 'RSK_Colors.txt')]
-map_files = [('RSK_Map.svg', read(P('dist/assets/rsk-map.svg'))), ('RSK_Map.png', read(P('dist/assets/rsk-map.png')))]
+map_files = [('RSK_Map.svg', read(P('dist/assets/rsk-map-full.svg'))), ('RSK_Map.png', read(P('dist/assets/rsk-map-full.png')))]
 projects = [(n, read(P('source-assets/projects', n))) for n in sorted(os.listdir(P('source-assets/projects')))]
 logos_zip = zipfile.ZipFile(P('dist/downloads/RSK_Logos.zip'))
 logos = [(n, logos_zip.read(n)) for n in logos_zip.namelist()]

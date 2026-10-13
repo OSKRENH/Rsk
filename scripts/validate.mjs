@@ -41,7 +41,7 @@ for (const m of css.matchAll(/url\('([^']+)'\)/g)) if (!exists(m[1])) fail('Miss
 
 // Files the page, the manifest and crawlers expect.
 for (const file of ['_headers', 'robots.txt', 'sitemap.xml', 'site.webmanifest', 'assets/og.png', 'assets/favicon-32.png',
-  'assets/apple-touch-icon.png', 'assets/icon-192.png', 'assets/icon-512.png', 'assets/rsk-map.png',
+  'assets/apple-touch-icon.png', 'assets/icon-192.png', 'assets/icon-512.png', 'assets/rsk-map-full.svg', 'assets/rsk-map-full.png',
   'downloads/RSK_Brand_Kit.zip', 'downloads/RSK_Logos.zip', 'downloads/RSK_Fonts.zip', 'downloads/RSK_Colors.zip', 'downloads/RSK_Map.zip', 'downloads/RSK_Projects.zip']) {
   if (!exists(file)) fail('Missing ' + file);
 }

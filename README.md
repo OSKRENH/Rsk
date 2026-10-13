@@ -38,7 +38,7 @@
 - `source-assets/` исходные крупные изображения и шрифты, не публикуются.
 - Архивы в `dist/downloads` собирает `python3 scripts/build-downloads.py` (нужны `fonttools` и `brotli`): цвета, карта, изображения проектов и общий `RSK_Brand_Kit.zip` со всем, что есть на странице. Исходники цветов и проектов лежат в `source-assets/colors` и `source-assets/projects`. После смены карты или цветов запустите скрипт заново.
 - `docs/` внутренние заметки об источниках, не публикуются.
-- Карта для мобильного (`dist/assets/rsk-map-compact.svg`) собрана из основной карты с увеличенными маркерами.
+- Карты `dist/assets/rsk-map*.svg` собирает `node scripts/build-map.mjs` из присланного файла `source-assets/map/rsk-map-source.svg` (нужен playwright): три кадра для экранов с отметками городов и `rsk-map-full.svg/png` для скачивания. Это исходная карта целиком плюс отметки.
 - `og:image` задан относительным путём `assets/og.png`. После привязки домена замените на абсолютный адрес и добавьте `canonical`.
 
 ## Проверки
