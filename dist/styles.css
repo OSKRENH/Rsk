@@ -77,7 +77,7 @@ body::before{content:'';position:fixed;inset:0 0 auto 0;height:6.25rem;z-index:2
 .text-link:active,.project-links a:active,.footer-main>a:last-child:active{opacity:.6}
 
 /* ---- Logos ---- */
-.logo-toolbar{display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-bottom:1.25rem}
+.logo-toolbar{display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-top:1.25rem}
 .logo-format{font-size:var(--fs-xs);color:var(--muted)}
 .logo-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
 .logo-item{display:flex;flex-direction:column;min-width:0}
